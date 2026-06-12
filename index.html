@@ -396,6 +396,11 @@ const fill = document.getElementById('scrubber-fill');
 function emailValido(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
 
 async function dispararDescarga(){
+  const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  if (esIOS) {
+    window.open(CONFIG.WAV_URL, '_blank');
+    return;
+  }
   try {
     const resp = await fetch(CONFIG.WAV_URL);
     const blob = await resp.blob();
